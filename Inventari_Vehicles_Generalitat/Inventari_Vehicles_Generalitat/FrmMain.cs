@@ -16,5 +16,6 @@ namespace Inventari_Vehicles_Generalitat
         {
             InitializeComponent();
         }
+
     }
 }
