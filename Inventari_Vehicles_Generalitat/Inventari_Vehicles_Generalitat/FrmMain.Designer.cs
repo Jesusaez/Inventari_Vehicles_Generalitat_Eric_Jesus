@@ -51,16 +51,18 @@
             this.btExaminar = new System.Windows.Forms.Button();
             this.tbRuta = new System.Windows.Forms.TextBox();
             this.gbDates = new System.Windows.Forms.GroupBox();
-            this.dtpInici = new System.Windows.Forms.DateTimePicker();
-            this.dtpFin = new System.Windows.Forms.DateTimePicker();
-            this.lbData = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.lbData = new System.Windows.Forms.Label();
+            this.dtpFin = new System.Windows.Forms.DateTimePicker();
+            this.dtpInici = new System.Windows.Forms.DateTimePicker();
+            this.gbExportar = new System.Windows.Forms.GroupBox();
             this.gbOrdenar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDades)).BeginInit();
             this.gbTotals.SuspendLayout();
             this.gbDades.SuspendLayout();
             this.gbFitxer.SuspendLayout();
             this.gbDates.SuspendLayout();
+            this.gbExportar.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbOrdenar
@@ -122,34 +124,37 @@
             // 
             this.btData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btData.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btData.Location = new System.Drawing.Point(910, 686);
+            this.btData.Location = new System.Drawing.Point(557, 31);
             this.btData.Name = "btData";
             this.btData.Size = new System.Drawing.Size(177, 42);
             this.btData.TabIndex = 15;
             this.btData.Text = "Data Grid View";
             this.btData.UseVisualStyleBackColor = false;
+            this.btData.Click += new System.EventHandler(this.btData_Click);
             // 
             // btCombustibles
             // 
             this.btCombustibles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btCombustibles.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btCombustibles.Location = new System.Drawing.Point(700, 686);
+            this.btCombustibles.Location = new System.Drawing.Point(344, 31);
             this.btCombustibles.Name = "btCombustibles";
             this.btCombustibles.Size = new System.Drawing.Size(177, 42);
             this.btCombustibles.TabIndex = 14;
             this.btCombustibles.Text = "Tipus Combustibles";
             this.btCombustibles.UseVisualStyleBackColor = false;
+            this.btCombustibles.Click += new System.EventHandler(this.btCombustibles_Click);
             // 
             // btMarcas
             // 
             this.btMarcas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btMarcas.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btMarcas.Location = new System.Drawing.Point(494, 686);
+            this.btMarcas.Location = new System.Drawing.Point(128, 31);
             this.btMarcas.Name = "btMarcas";
             this.btMarcas.Size = new System.Drawing.Size(177, 42);
             this.btMarcas.TabIndex = 13;
             this.btMarcas.Text = "Marques y Models";
             this.btMarcas.UseVisualStyleBackColor = false;
+            this.btMarcas.Click += new System.EventHandler(this.btMarcas_Click);
             // 
             // btMostrarDades
             // 
@@ -309,22 +314,14 @@
             this.gbDates.TabStop = false;
             this.gbDates.Text = "Dates";
             // 
-            // dtpInici
+            // label1
             // 
-            this.dtpInici.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpInici.Location = new System.Drawing.Point(19, 41);
-            this.dtpInici.Name = "dtpInici";
-            this.dtpInici.Size = new System.Drawing.Size(117, 22);
-            this.dtpInici.TabIndex = 0;
-            this.dtpInici.ValueChanged += new System.EventHandler(this.dtpInici_ValueChanged);
-            // 
-            // dtpFin
-            // 
-            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFin.Location = new System.Drawing.Point(157, 40);
-            this.dtpFin.Name = "dtpFin";
-            this.dtpFin.Size = new System.Drawing.Size(112, 22);
-            this.dtpFin.TabIndex = 1;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(185, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 16);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Hasta";
             // 
             // lbData
             // 
@@ -335,25 +332,43 @@
             this.lbData.TabIndex = 8;
             this.lbData.Text = "Desde";
             // 
-            // label1
+            // dtpFin
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(185, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 16);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Hasta";
+            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFin.Location = new System.Drawing.Point(157, 40);
+            this.dtpFin.Name = "dtpFin";
+            this.dtpFin.Size = new System.Drawing.Size(112, 22);
+            this.dtpFin.TabIndex = 1;
+            // 
+            // dtpInici
+            // 
+            this.dtpInici.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpInici.Location = new System.Drawing.Point(19, 41);
+            this.dtpInici.Name = "dtpInici";
+            this.dtpInici.Size = new System.Drawing.Size(117, 22);
+            this.dtpInici.TabIndex = 0;
+            this.dtpInici.ValueChanged += new System.EventHandler(this.dtpInici_ValueChanged);
+            // 
+            // gbExportar
+            // 
+            this.gbExportar.Controls.Add(this.btMarcas);
+            this.gbExportar.Controls.Add(this.btCombustibles);
+            this.gbExportar.Controls.Add(this.btData);
+            this.gbExportar.Location = new System.Drawing.Point(356, 655);
+            this.gbExportar.Name = "gbExportar";
+            this.gbExportar.Size = new System.Drawing.Size(1074, 85);
+            this.gbExportar.TabIndex = 16;
+            this.gbExportar.TabStop = false;
+            this.gbExportar.Text = "Exportar dades";
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1474, 747);
+            this.ClientSize = new System.Drawing.Size(1474, 753);
+            this.Controls.Add(this.gbExportar);
             this.Controls.Add(this.gbDates);
             this.Controls.Add(this.gbOrdenar);
-            this.Controls.Add(this.btData);
-            this.Controls.Add(this.btCombustibles);
-            this.Controls.Add(this.btMarcas);
             this.Controls.Add(this.btMostrarDades);
             this.Controls.Add(this.dgDades);
             this.Controls.Add(this.gbTotals);
@@ -372,6 +387,7 @@
             this.gbFitxer.PerformLayout();
             this.gbDates.ResumeLayout(false);
             this.gbDates.PerformLayout();
+            this.gbExportar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -405,6 +421,7 @@
         private System.Windows.Forms.DateTimePicker dtpInici;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbData;
+        private System.Windows.Forms.GroupBox gbExportar;
     }
 }
 

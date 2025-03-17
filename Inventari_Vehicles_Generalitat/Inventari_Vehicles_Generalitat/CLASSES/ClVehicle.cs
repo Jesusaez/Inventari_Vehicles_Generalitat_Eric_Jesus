@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Inventari_Vehicles_Generalitat
+namespace Inventari_Vehicles_Generalitat.CLASSES
 {
     public class Vehicle
     {

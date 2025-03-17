@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inventari_Vehicles_Generalitat.CLASSES;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,8 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Inventari_Vehicles_Generalitat
 {
@@ -17,7 +20,7 @@ namespace Inventari_Vehicles_Generalitat
     {
         static XPathDocument document;
         XPathNavigator navegador;
-
+        ClExportar ExportarDades; 
         // objectes que utilitzarem per a crear un nou arxiu XML
         XmlDocument xDoc;
         XmlNode xNodeArrel;
@@ -277,6 +280,28 @@ namespace Inventari_Vehicles_Generalitat
 
         private void dtpInici_ValueChanged(object sender, EventArgs e)
         {
+            //DateTime dtMinim = new DateTime(1985, 5, 10);
+            //if(dtpInici.Value<dtMinim) dtpInici.Value = dtMinim;
+        }
+
+        private void btMarcas_Click(object sender, EventArgs e)
+        {
+            List<string> listMarques = lbMarca.Items.Cast<string>().ToList();
+            ExportarDades = new ClExportar();
+            ExportarDades.exportarList(listMarques, "Marques");
+        }
+
+        private void btCombustibles_Click(object sender, EventArgs e)
+        {
+            List<string> comboBoxItems = cbCombustible.Items.Cast<string>().ToList();
+            ExportarDades = new ClExportar();
+            ExportarDades.exportarList(comboBoxItems, "Combustibles");
+        }
+
+        private void btData_Click(object sender, EventArgs e)
+        {
+            ExportarDades = new ClExportar();
+            ExportarDades.exportarDg(dgDades,"Dades Vehicles");
         }
     }
 }
