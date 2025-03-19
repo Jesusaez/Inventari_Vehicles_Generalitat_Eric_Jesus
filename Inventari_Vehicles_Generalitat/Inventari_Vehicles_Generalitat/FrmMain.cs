@@ -20,12 +20,8 @@ namespace Inventari_Vehicles_Generalitat
     {
         static XPathDocument document;
         XPathNavigator navegador;
-        ClExportar ExportarDades; 
-        // objectes que utilitzarem per a crear un nou arxiu XML
-        XmlDocument xDoc;
-        XmlNode xNodeArrel;
-        XmlDeclaration xDeclaracio;
-        XmlComment xComentari;
+        ClExportar ExportarDades;
+        bool dadesCarregades = false;
         public FrmMain()
         {
             InitializeComponent();
@@ -46,10 +42,18 @@ namespace Inventari_Vehicles_Generalitat
                 }
 
             }
+            try
+            {
+                getCombo();
+                getMarques();
+                getDates();
+                dadesCarregades = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"ERROR", MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
 
-            getCombo();
-            getMarques();
-            getDates();
         }
 
         private void getDates()
@@ -180,6 +184,7 @@ namespace Inventari_Vehicles_Generalitat
 
         private void btMostrarDades_Click(object sender, EventArgs e)
         {
+            if (!dadesCarregades) return;
             int numVehicles = 0;
             var vehiclesList = new List<Vehicle>(); 
 
@@ -278,12 +283,6 @@ namespace Inventari_Vehicles_Generalitat
             tbVehicles.Text = numVehicles.ToString();
         }
 
-        private void dtpInici_ValueChanged(object sender, EventArgs e)
-        {
-            //DateTime dtMinim = new DateTime(1985, 5, 10);
-            //if(dtpInici.Value<dtMinim) dtpInici.Value = dtMinim;
-        }
-
         private void btMarcas_Click(object sender, EventArgs e)
         {
             List<string> listMarques = lbMarca.Items.Cast<string>().ToList();
@@ -302,6 +301,11 @@ namespace Inventari_Vehicles_Generalitat
         {
             ExportarDades = new ClExportar();
             ExportarDades.exportarDg(dgDades,"Dades Vehicles");
+        }
+
+        private void dtpInici_ValueChanged_1(object sender, EventArgs e)
+        {
+            if (dtpInici.Value > dtpFin.Value) dtpFin.Value = dtpInici.Value;
         }
     }
 }

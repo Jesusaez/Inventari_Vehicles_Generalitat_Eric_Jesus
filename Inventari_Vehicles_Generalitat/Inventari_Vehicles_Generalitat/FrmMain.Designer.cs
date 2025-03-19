@@ -87,6 +87,7 @@
             this.rbTipusDret.TabIndex = 3;
             this.rbTipusDret.Text = "Tipus Dret";
             this.rbTipusDret.UseVisualStyleBackColor = true;
+            this.rbTipusDret.Click += new System.EventHandler(this.btMostrarDades_Click);
             // 
             // rbMarca
             // 
@@ -97,6 +98,7 @@
             this.rbMarca.TabIndex = 2;
             this.rbMarca.Text = "Marca y Model";
             this.rbMarca.UseVisualStyleBackColor = true;
+            this.rbMarca.Click += new System.EventHandler(this.btMostrarDades_Click);
             // 
             // rbDataDESC
             // 
@@ -107,6 +109,7 @@
             this.rbDataDESC.TabIndex = 1;
             this.rbDataDESC.Text = "Data Alta ↓";
             this.rbDataDESC.UseVisualStyleBackColor = true;
+            this.rbDataDESC.Click += new System.EventHandler(this.btMostrarDades_Click);
             // 
             // rbDataASC
             // 
@@ -119,6 +122,7 @@
             this.rbDataASC.TabStop = true;
             this.rbDataASC.Text = "Data Alta ↑";
             this.rbDataASC.UseVisualStyleBackColor = true;
+            this.rbDataASC.Click += new System.EventHandler(this.btMostrarDades_Click);
             // 
             // btData
             // 
@@ -339,6 +343,7 @@
             this.dtpFin.Name = "dtpFin";
             this.dtpFin.Size = new System.Drawing.Size(112, 22);
             this.dtpFin.TabIndex = 1;
+            this.dtpFin.ValueChanged += new System.EventHandler(this.dtpInici_ValueChanged_1);
             // 
             // dtpInici
             // 
@@ -347,7 +352,7 @@
             this.dtpInici.Name = "dtpInici";
             this.dtpInici.Size = new System.Drawing.Size(117, 22);
             this.dtpInici.TabIndex = 0;
-            this.dtpInici.ValueChanged += new System.EventHandler(this.dtpInici_ValueChanged);
+            this.dtpInici.ValueChanged += new System.EventHandler(this.dtpInici_ValueChanged_1);
             // 
             // gbExportar
             // 

@@ -1,28 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Excel = Microsoft.Office.Interop.Excel;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Inventari_Vehicles_Generalitat.CLASSES
 {
     public class ClExportar
     {
-        private Excel.Application excelApp;
-        private Excel.Workbook workbook;
-        private Excel.Worksheet worksheet;
-
-        private void iniExcel(string xWorksheetName)
-        {
-            if (excelApp == null)
-            {
-                excelApp = new Excel.Application();
-                excelApp.Visible = false;
-                workbook = excelApp.Workbooks.Add();
-                worksheet = (Excel.Worksheet)workbook.Sheets.Add();
-                worksheet.Name = xWorksheetName;
-            }
-        }
-        public void exportarList(List<string> list, string worksheetName)
+        public void exportarList(List<string> list, string nom)
         {
             if (list.Count == 0)
             {
@@ -32,12 +18,21 @@ namespace Inventari_Vehicles_Generalitat.CLASSES
 
             try
             {
-                iniExcel(worksheetName);
+                string miniNom = "Dades";
+                if (nom == "Combustibles") miniNom = "Combustible";
+                if (nom == "Marques") miniNom = "Marca";
 
-                //omplir capçalera
-                worksheet.Cells[1] = worksheetName;
-                omplirExcelList(list);
-                desarExcel();
+                List<XElement> elementos = new List<XElement>();
+
+                foreach (string item in list)
+                {
+                    elementos.Add(new XElement(miniNom, item));
+                }
+
+                XDocument xDoc = new XDocument(new XElement(nom, elementos));
+
+                desarXML(xDoc);
+
             }
             catch (Exception ex)
             {
@@ -45,17 +40,9 @@ namespace Inventari_Vehicles_Generalitat.CLASSES
             }
         }
 
-        private void omplirExcelList(List<string> list)
+        public void exportarDg(DataGridView dgDades, string nom)
         {
-            for (int i = 0; i < list.Count; i++)
-            {
-                worksheet.Cells[i + 2 , 1] = list[i].ToString();
-            }
-        }
-
-        public void exportarDg(DataGridView dataGridView, string worksheetName)
-        {
-            if (dataGridView.Rows.Count == 0)
+            if (dgDades.Rows.Count == 0)
             {
                 MessageBox.Show("No hi han dades.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -63,11 +50,25 @@ namespace Inventari_Vehicles_Generalitat.CLASSES
 
             try
             {
-                iniExcel(worksheetName);
+                XElement xmlRoot = new XElement(nom.Replace(" ","_"));
 
-                omplirCapcalera(dataGridView);
-                omplirExcelDg(dataGridView);
-                desarExcel();
+                foreach (DataGridViewRow row in dgDades.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        XElement rowEle = new XElement("Cotxe");
+                        foreach (DataGridViewCell celda in row.Cells)
+                        {
+                            string titol = dgDades.Columns[celda.ColumnIndex].HeaderText.Replace(" ", "_");
+                            string dades = celda.Value == null || string.IsNullOrWhiteSpace(celda.Value.ToString()) ? "N/A" : celda.Value.ToString().Replace(" ", "_");
+                            rowEle.Add(new XElement(titol, dades));
+                        }
+                        xmlRoot.Add(rowEle);
+                    }
+                }
+
+                XDocument xmlDocument = new XDocument(xmlRoot);
+                desarXML(xmlDocument);
             }
             catch (Exception ex)
             {
@@ -75,53 +76,25 @@ namespace Inventari_Vehicles_Generalitat.CLASSES
             }
         }
 
-        private void omplirCapcalera(DataGridView dataGridView)
-        {
-            for (int i = 0; i < dataGridView.Columns.Count; i++)
-            {
-                worksheet.Cells[1, i + 1] = dataGridView.Columns[i].HeaderText;
-            }
-        }
-
-        private void omplirExcelDg(DataGridView dataGridView)
-        {
-            for (int i = 0; i < dataGridView.Rows.Count; i++)
-            {
-                for (int j = 0; j < dataGridView.Columns.Count; j++)
-                {
-                    worksheet.Cells[i + 2, j + 1] = dataGridView.Rows[i].Cells[j].Value.ToString() ?? "";
-                }
-            }
-        }
-
         private string obrirDialog()
         {
             SaveFileDialog saveDialog = new SaveFileDialog
             {
-                Filter = "Arxius Excel (*.xlsx)|*.xlsx",
-                Title = "Desar arxiu Excel",
-                FileName = "Dades.xlsx"
+                Filter = "Arxius XML (*.xml)|*.xml",
+                Title = "Desar arxiu XML",
+                FileName = "Dades.xml"
             };
 
             return saveDialog.ShowDialog() == DialogResult.OK ? saveDialog.FileName : string.Empty;
         }
 
-        private void desarExcel()
+        private void desarXML(XDocument xmlDocument)
         {
             string rutaArchivo = obrirDialog();
             if (!string.IsNullOrEmpty(rutaArchivo))
             {
-                workbook.SaveAs(rutaArchivo);
-                workbook.Close();
-                excelApp.Quit();
-                excelApp = null;
+                xmlDocument.Save(rutaArchivo);
                 MessageBox.Show("Dades exportades correctament.", "DADES EXPORTADES", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                workbook.Close(false);
-                excelApp.Quit();
-                excelApp = null;
             }
         }
     }

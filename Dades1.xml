@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Combustibles>
+  <Elements>
+    <Element>Benzina/GLP</Element>
+    <Element>Diesel</Element>
+    <Element>Elèctric</Element>
+    <Element>Gas</Element>
+    <Element>Gasolina</Element>
+    <Element>Híbrid</Element>
+    <Element>Vapor</Element>
+  </Elements>
+</Combustibles>
