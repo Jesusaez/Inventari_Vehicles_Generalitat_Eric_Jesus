@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbOrdenar = new System.Windows.Forms.GroupBox();
             this.rbTipusDret = new System.Windows.Forms.RadioButton();
             this.rbMarca = new System.Windows.Forms.RadioButton();
@@ -37,7 +39,6 @@
             this.btCombustibles = new System.Windows.Forms.Button();
             this.btMarcas = new System.Windows.Forms.Button();
             this.btMostrarDades = new System.Windows.Forms.Button();
-            this.dgDades = new System.Windows.Forms.DataGridView();
             this.gbTotals = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tbVehicles = new System.Windows.Forms.TextBox();
@@ -56,13 +57,14 @@
             this.dtpFin = new System.Windows.Forms.DateTimePicker();
             this.dtpInici = new System.Windows.Forms.DateTimePicker();
             this.gbExportar = new System.Windows.Forms.GroupBox();
+            this.dgDades = new System.Windows.Forms.DataGridView();
             this.gbOrdenar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDades)).BeginInit();
             this.gbTotals.SuspendLayout();
             this.gbDades.SuspendLayout();
             this.gbFitxer.SuspendLayout();
             this.gbDates.SuspendLayout();
             this.gbExportar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgDades)).BeginInit();
             this.SuspendLayout();
             // 
             // gbOrdenar
@@ -171,16 +173,6 @@
             this.btMostrarDades.Text = "Mostrar Dades";
             this.btMostrarDades.UseVisualStyleBackColor = false;
             this.btMostrarDades.Click += new System.EventHandler(this.btMostrarDades_Click);
-            // 
-            // dgDades
-            // 
-            this.dgDades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDades.Location = new System.Drawing.Point(364, 198);
-            this.dgDades.Name = "dgDades";
-            this.dgDades.RowHeadersWidth = 51;
-            this.dgDades.RowTemplate.Height = 24;
-            this.dgDades.Size = new System.Drawing.Size(1066, 451);
-            this.dgDades.TabIndex = 11;
             // 
             // gbTotals
             // 
@@ -366,16 +358,45 @@
             this.gbExportar.TabStop = false;
             this.gbExportar.Text = "Exportar dades";
             // 
+            // dgDades
+            // 
+            this.dgDades.AllowUserToAddRows = false;
+            this.dgDades.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgDades.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgDades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgDades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgDades.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgDades.Location = new System.Drawing.Point(364, 209);
+            this.dgDades.Name = "dgDades";
+            this.dgDades.ReadOnly = true;
+            this.dgDades.RowHeadersVisible = false;
+            this.dgDades.RowHeadersWidth = 51;
+            this.dgDades.RowTemplate.Height = 24;
+            this.dgDades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgDades.Size = new System.Drawing.Size(1066, 440);
+            this.dgDades.TabIndex = 17;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1474, 753);
+            this.Controls.Add(this.dgDades);
             this.Controls.Add(this.gbExportar);
             this.Controls.Add(this.gbDates);
             this.Controls.Add(this.gbOrdenar);
             this.Controls.Add(this.btMostrarDades);
-            this.Controls.Add(this.dgDades);
             this.Controls.Add(this.gbTotals);
             this.Controls.Add(this.gbDades);
             this.Controls.Add(this.gbFitxer);
@@ -383,7 +404,6 @@
             this.Text = "Inventari de vehicles de la Generalitat de Catalunya i el sector públic";
             this.gbOrdenar.ResumeLayout(false);
             this.gbOrdenar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgDades)).EndInit();
             this.gbTotals.ResumeLayout(false);
             this.gbTotals.PerformLayout();
             this.gbDades.ResumeLayout(false);
@@ -393,6 +413,7 @@
             this.gbDates.ResumeLayout(false);
             this.gbDates.PerformLayout();
             this.gbExportar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgDades)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -408,7 +429,6 @@
         private System.Windows.Forms.Button btCombustibles;
         private System.Windows.Forms.Button btMarcas;
         private System.Windows.Forms.Button btMostrarDades;
-        private System.Windows.Forms.DataGridView dgDades;
         private System.Windows.Forms.GroupBox gbTotals;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbVehicles;
@@ -427,6 +447,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbData;
         private System.Windows.Forms.GroupBox gbExportar;
+        private System.Windows.Forms.DataGridView dgDades;
     }
 }
 
